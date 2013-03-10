@@ -1,0 +1,15 @@
+CREDITS:
+
+MatchDart is strongly inspired by M0nty's Cricket League Module.
+I have made some heavy changes so nearly none of the original code is left
+(exept for the admin functions)
+
+Changes (incomplete):
+1. The Module now uses the xoops smarty engine and template system
+2. Some Cricket specific values have ben substituted by Dart specific ones
+3. The Head-Head, Season and Event statistik have been dropped
+(just because i have not enough time atm - they will be back in a future release)
+4. The Players (teams) are no longer bound for one season/event
+
+For the next release i will work mainly on a form to allow a xoops user
+to add matches for a season/event if he is authorized to do so by the admin.

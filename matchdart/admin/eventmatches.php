@@ -110,8 +110,8 @@ $matchdart_delete_submit = isset($_POST['delete_submit']) ? $_POST['delete_submi
 $matchdart_modifyall_submit = isset($_POST['modifyall_submit']) ? $_POST['modifyall_submit']: null;
 
 xoops_cp_header();
-if ($noframework == 0){loadModuleAdminMenu(4);}
-if ($noframework == 1){include 'navbar.php';}
+//if ($noframework == 0){loadModuleAdminMenu(4);}
+//if ($noframework == 1){include 'navbar.php';}
 
 //Exit check, if there are less than 2 teams in database independent of season and event - wild0ne
 $query = $xoopsDB->query("SELECT PlayerID FROM ".$xoopsDB->prefix("matchdart_players"));

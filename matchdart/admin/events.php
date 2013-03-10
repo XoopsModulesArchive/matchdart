@@ -25,7 +25,7 @@
  * READ manual.txt for installing & other help!!!
  * ************************************************************
  */
-
+include_once 'admin_header.php';
 include '../../../include/cp_header.php'; //Include file, which checks for permissions and sets navigation
 if (@include_once XOOPS_ROOT_PATH."/Frameworks/art/functions.php")
 {
@@ -49,8 +49,10 @@ $matchdart_modify_submit = isset($_POST['modify_submit']) ? $_POST['modify_submi
 $matchdart_delete_submit = isset($_POST['delete_submit']) ? $_POST['delete_submit'] : false;
 
 xoops_cp_header();
-if ($noframework == 0){loadModuleAdminMenu(2);}
-if ($noframework == 1){include 'navbar.php';}
+//if ($noframework == 0){loadModuleAdminMenu(2);}
+//if ($noframework == 1){include 'navbar.php';}
+$indexAdmin = new ModuleAdmin();
+echo $indexAdmin->addNavigation('events.php');
 
 if($matchdart_add_submit)
 {
@@ -194,9 +196,9 @@ elseif($matchdart_delete_submit)
 			//
 			//If event is published
 			//
-			if($matchdart_data['EventPublish'] == 1)
-			echo'<input type="checkbox" name="publish" value="1" CHECKED>';
-			else
+//			if($matchdart_data['EventPublish'] == 1)
+//			echo'<input type="checkbox" name="publish" value="1" CHECKED>';
+//			else
 			echo'<input type="checkbox" name="publish" value="1">';
 			
 			?>
@@ -241,9 +243,9 @@ elseif($matchdart_delete_submit)
 			<td align="left" valign="top">
 			<?php
 			
-			if($matchdart_data['EventDefault'] == 1)
-			echo"<input type=\"checkbox\" name=\"defevent\" value=\"1\" CHECKED>\n";
-			else
+//			if($matchdart_data['EventDefault'] == 1)
+//			echo"<input type=\"checkbox\" name=\"defevent\" value=\"1\" CHECKED>\n";
+//			else
 			echo"<input type=\"checkbox\" name=\"defevent\" value=\"1\">\n";
 			
 			?>
@@ -256,9 +258,9 @@ elseif($matchdart_delete_submit)
 			<td align="left" valign="top">
 			<?php
 			
-			if($matchdart_data['EventPlayerStats'] == 1)
-			echo"<input type=\"checkbox\" name=\"playerstats\" value=\"1\" CHECKED>\n";
-			else
+//			if($matchdart_data['EventPlayerStats'] == 1)
+//			echo"<input type=\"checkbox\" name=\"playerstats\" value=\"1\" CHECKED>\n";
+//			else
 			echo"<input type=\"checkbox\" name=\"playerstats\" value=\"1\">\n";
 			
 			?>

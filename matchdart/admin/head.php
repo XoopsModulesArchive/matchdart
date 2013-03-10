@@ -26,7 +26,8 @@
  * ************************************************************
  */
 
-if(!session_is_registered('season_name') || !session_is_registered('season_id'))
+//if(!session_is_registered('season_name') || !session_is_registered('season_id'))
+if ( !isset( $_SESSION['season_name'] ) || !isset( $_SESSION['season_id'] ))
 {
 	echo "<form method=\"post\" action=\"eventmatches.php\">";
 	echo '<b><?php echo _AM_XD_CHOSEASON;?></b>';

@@ -167,5 +167,3 @@ define("_XD_MATCHDELETED","Match gelöscht!");
 define("_XD_MATCHMODIFY","Match ändern");
 define("_XD_GOMODIFY","Ändern");
 define("_XD_GODELETE","Löschen");
-
-?>

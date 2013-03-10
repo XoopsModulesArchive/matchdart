@@ -25,7 +25,7 @@
  * READ manual.txt for installing & other help!!!
  * ************************************************************
  */
-
+include_once 'admin_header.php';
 include "../../../include/cp_header.php";
 if (@include_once XOOPS_ROOT_PATH."/Frameworks/art/functions.php")
 {
@@ -58,8 +58,10 @@ include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
  */
 
 xoops_cp_header();
-if ($noframework == 0){loadModuleAdminMenu(4);}
-if ($noframework == 1){include 'navbar.php';}
+//if ($noframework == 0){loadModuleAdminMenu(4);}
+//if ($noframework == 1){include 'navbar.php';}
+$indexAdmin = new ModuleAdmin();
+echo $indexAdmin->addNavigation('permissions.php');
 
 //$action = isset($_REQUEST['action']) ? strtolower($_REQUEST['action']) : "";
 $module_id = $xoopsModule->getVar('mid');

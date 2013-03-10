@@ -1,8 +1,13 @@
-************************************************************
+---------------------------------------
+Version 1.6  2013-03-06
+---------------------------------------
+- Converted to XOOPS 2.5.5 Admin GUI (mamba)
+
+------------------------------------------------------------
 Version 1.5 | 04-MAR-2008
 Dev: Xoops 2.0.18
 Tested: Xoops 2.0.18, 2.2.x, Simple Xoops 0.82, Impress CMS, 
-************************************************************
+------------------------------------------------------------
 Changes:
 - NEW: Legs, additional player stats
 - NEW: Legs won / lost to table, drop HighFinish against, 180 against to save space
@@ -12,9 +17,9 @@ Changes:
 - DEL: Admin Section 'Matches'
 - FIX: PvP Query SQL Statement gave wrong results, now corrected
 
-************************************************************
+---------------------------------------
 Version 1.4 | 07-Feb-2008
-************************************************************
+---------------------------------------
 Changes:
 - added stats
 - added degrade factor description
@@ -22,9 +27,9 @@ Changes:
 - Layout changes
 - FIX: Session var handling
 
-************************************************************
+---------------------------------------
 Version 1.3 | 01-Feb-2008
-************************************************************
+---------------------------------------
 matchdart is strongly inspired by M0nty's Cricket League Module.
 I have made some heavy changes so nearly none of the original code is left
 (exept for the admin functions)
@@ -35,20 +40,20 @@ Changes (incomplete):
    (just because i have not enough time atm - they will be back in a future release)
 4. The Players (teams) are no longer bound for one season/event
 
-************************************************************
+---------------------------------------
 Xoops Ranking 1.0 
 minor changes of player logik, db fields and stats
 by mawi27
-************************************************************
+---------------------------------------
 Cricket League Version & Modifications by M0nty <vaughan.montgomery@gmail.com>
 I have tested with XOOPS 2.0.13.1, but i have not tested with XOOPS 2.1 or higher!!!
 Version 1.0 RC1 | 01-Oct-2005
-************************************************************
+---------------------------------------
 Ported to xoops by Mythrandir http://www.web-udvikling.dk and 
 ralf57 http://www.madeinbanzi.it
-************************************************************
+---------------------------------------
 TPLLeagueStats is a league stats software designed for football (soccer) team.
 Copyright (C) 2003  Timo Leppänen / TPL Design
 email:     info@tpl-design.com
 www:       www.tpl-design.com/tplleaguestats
-************************************************************
+---------------------------------------
