@@ -1,0 +1,83 @@
+<{include file="db:xd_select_header.html"}>
+
+<form name="xd_matches_form" method="post" action="matches.php">
+
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_matches_width}>">
+<br>
+<{$msg}>
+
+<{if $update_req!=1}>
+	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><a href="matches.php?action=addnew&amp;id=0"><img src="images/<{$xd_language}>/btn_addnew.gif" border="0" alt="<{$smarty.const._XD_MATCHADD}>" title="<{$smarty.const._XD_MATCHADD}>"></a></td>
+	</tr>
+	</table>
+	<{if $action!=''}>
+		<{include file="db:xd_matches_form.html"}>
+	<{/if}>
+<{/if}>
+
+<table width="50%">
+<tr>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_MATCHDATESHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_HOME}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLSETS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLLEGS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_MATCHBONUSPOINTS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBL180SHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLHIGHFINISHSHORT}></b></th>
+	<{if $eventdata.playerstats == 1}>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLDARTSSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLPPTSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLPPDSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLMATCHDARTSSHORT}></b></th>
+	<{/if}>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_AWAY}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLSETS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLLEGS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_MATCHBONUSPOINTS}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBL180SHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLHIGHFINISHSHORT}></b></th>
+	<{if $eventdata.playerstats == 1}>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLDARTSSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLPPTSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLPPDSHORT}></b></th>
+	<th align="left" valign="middle"><b><{$smarty.const._XD_TBLMATCHDARTSSHORT}></b></th>
+	<{/if}>
+	<th align="left" valign="middle">&nbsp;</th>
+	<th align="left" valign="middle">&nbsp;</th>
+</tr>
+<{foreach item=mi from=$match}>
+<tr class="<{cycle values="odd,even"}>">
+	<td align="left" valign="middle"><{$mi.date}></td>
+	<td align="left" valign="middle"><b><{$mi.hometeam}></b></td>
+  	<td align="center" valign="middle"><{$mi.homesets}></td>
+  	<td align="center" valign="middle"><{$mi.homelegs}></td>
+  	<td align="center" valign="middle"><{$mi.homebpoints}></td>
+  	<td align="center" valign="middle"><{$mi.home180}></td>
+  	<td align="center" valign="middle"><{$mi.homehighfinish}></td>
+	<{if $eventdata.playerstats == 1}>
+  	<td align="center" valign="middle"><{$mi.homedarts}></td>
+  	<td align="center" valign="middle"><{$mi.homeppt}></td>
+  	<td align="center" valign="middle"><{$mi.homeppd}></td>
+  	<td align="center" valign="middle"><{$mi.homematchdarts}></td>
+	<{/if}>
+  	<td align="left" valign="middle"><b><{$mi.awayteam}></b></td>
+  	<td align="center" valign="middle"><{$mi.awaysets}></td>
+  	<td align="center" valign="middle"><{$mi.awaylegs}></td>
+  	<td align="center" valign="middle"><{$mi.awaybpoints}></td>
+  	<td align="center" valign="middle"><{$mi.away180}></td>
+  	<td align="center" valign="middle"><{$mi.awayhighfinish}></td>
+	<{if $eventdata.playerstats == 1}>
+  	<td align="center" valign="middle"><{$mi.awaydarts}></td>
+  	<td align="center" valign="middle"><{$mi.awayppt}></td>
+  	<td align="center" valign="middle"><{$mi.awayppd}></td>
+  	<td align="center" valign="middle"><{$mi.awaymatchdarts}></td>
+	<{/if}>
+	<td align="left" valign="middle"><a href="matches.php?action=modify&amp;id=<{$mi.id}>"><img src="images/btn_modify.png" border="0" alt="<{$smarty.const._XD_MATCHMODIFY}>" title="<{$smarty.const._XD_MATCHMODIFY}>"></a></td>
+	<td align="left" valign="middle"><a href="matches.php?action=delete&amp;id=<{$mi.id}>"><img src="images/btn_delete.png" border="0" alt="<{$smarty.const._XD_MATCHDELETE}>" title="<{$smarty.const._XD_MATCHDELETE}>"></a></td>
+  </tr>
+  <{/foreach}>
+</table>
+</div>
+</form>

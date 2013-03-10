@@ -1,0 +1,331 @@
+<{include file="db:xd_select_header.html"}>
+
+<script type="text/javascript">
+function refreshstats (selbox) {
+	switch (selbox) {
+  		case "in_pvpplayer1":
+			document.forms.xd_pvp_form.go_pvpplayer1.value = 1;
+	    	break;
+  		case "in_pvpplayer2":
+			document.forms.xd_pvp_form.go_pvpplayer2.value = 1;
+		    break;
+	}
+	document.forms.xd_pvp_form.submit();
+}
+</script> 
+
+
+<form name="xd_pvp_form" method="post" action="<{$script}>">
+
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_pvp_width}>">
+<table>
+	<tr>
+		<td width="45%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_PVPPLAYER1}></td>
+					<td width="45%">
+						<select name="in_pvpplayer1" onchange="refreshstats('in_pvpplayer1')">
+		      				<{foreach item=pi from=$player}>
+      							<option <{if $pi.id==$pvpplayer1}>selected="selected"<{/if}> value="<{$pi.id}>"><{$pi.name}></option>
+      						<{/foreach}>
+      					</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_pvpplayer1"></td>
+				</tr>
+			</table>
+		</td>
+		<td>  </td>
+		<td width="45%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_PVPPLAYER2}></td>
+					<td width="45%">
+						<select name="in_pvpplayer2" onchange="refreshstats('in_pvpplayer2')">
+		      				<{foreach item=pi from=$player}>
+      							<option <{if $pi.id==$pvpplayer2}>selected="selected"<{/if}> value="<{$pi.id}>"><{$pi.name}></option>
+      						<{/foreach}>
+      					</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_pvpplayer2"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+<br>
+<table class="outer" style="text-align:center">
+	<tr>
+		<td style="font-weight:bold;text-decoration:underline"><{$p1pvpname}></td>
+		<th><{$smarty.const._XD_PVP}></th>
+		<td style="font-weight:bold;text-decoration:underline"><{$p2pvpname}></td>
+	</tr>
+	<{if $p1pvpstats.matches == -1}>
+		<tr class="even">
+			<td>&nbsp;</td>
+			<td style="font-weight: bold"><{$smarty.const._XD_PVPNOMATCHES}></td>
+			<td>&nbsp;</td>
+		</tr>
+	<{else}>
+		<tr class="even">
+			<td>&nbsp;</td>
+			<td style="font-weight:bold"><{$smarty.const._XD_PVPTOTAL}></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvptotmatches}></td>
+			<td><{$smarty.const._XD_PVPMATCHES}></td>
+			<td><{$p2pvpstats.pvptotmatches}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvptotwins}> - <{$p1pvpstats.pvptotdraws}> - <{$p1pvpstats.pvptotloses}></td>
+			<td><{$smarty.const._XD_PVPWDL}></td>
+			<td><{$p2pvpstats.pvptotwins}> - <{$p2pvpstats.pvptotdraws}> - <{$p2pvpstats.pvptotloses}></td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvptotsetswin}> - <{$p1pvpstats.pvptotsetslose}></td>
+			<td><{$smarty.const._XD_PVPSETS}></td>
+			<td><{$p2pvpstats.pvptotsetswin}> - <{$p2pvpstats.pvptotsetslose}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvptot180}></td>
+			<td><{$smarty.const._XD_PVP180}></td>
+			<td><{$p2pvpstats.pvptot180}></td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1pvpstats.pvptothighfinish != 0}><{$p1pvpstats.pvptothighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_PVPHIGHFINISH}></td>
+			<td><{if $p2pvpstats.pvptothighfinish != 0}><{$p2pvpstats.pvptothighfinish}><{/if}>&nbsp;</td>
+		</tr>
+		<tr class="even">
+			<td>&nbsp;</td>
+			<td style="font-weight:bold"><{$smarty.const._XD_HOME}></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvphomematches}></td>
+			<td><{$smarty.const._XD_PVPMATCHES}></td>
+			<td><{$p2pvpstats.pvphomematches}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvphomewin}> - <{$p1pvpstats.pvphomedraw}> - <{$p1pvpstats.pvphomelose}></td>
+			<td><{$smarty.const._XD_PVPWDL}></td>
+			<td><{$p2pvpstats.pvphomewin}> - <{$p2pvpstats.pvphomedraw}> - <{$p2pvpstats.pvphomelose}></td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvphomesets}> - <{$p1pvpstats.pvphomesetslose}></td>
+			<td><{$smarty.const._XD_PVPSETS}></td>
+			<td><{$p2pvpstats.pvphomesets}> - <{$p2pvpstats.pvphomesetslose}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvphome180}></td>
+			<td><{$smarty.const._XD_PVP180}></td>
+			<td><{$p2pvpstats.pvphome180}></td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1pvpstats.pvphomehighfinish != 0}><{$p1pvpstats.pvphomehighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_PVPHIGHFINISH}></td>
+			<td><{if $p2pvpstats.pvphomehighfinish != 0}><{$p2pvpstats.pvphomehighfinish}><{/if}>&nbsp;</td>
+		</tr>
+		<tr class="even">
+			<td>&nbsp;</td>
+			<td style="font-weight:bold"><{$smarty.const._XD_AWAY}></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvpawaymatches}></td>
+			<td><{$smarty.const._XD_PVPMATCHES}></td>
+			<td><{$p2pvpstats.pvpawaymatches}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvpawaywin}> - <{$p1pvpstats.pvpawaydraw}> - <{$p1pvpstats.pvpawaylose}></td>
+			<td><{$smarty.const._XD_PVPWDL}></td>
+			<td><{$p2pvpstats.pvpawaywin}> - <{$p2pvpstats.pvpawaydraw}> - <{$p2pvpstats.pvpawaylose}></td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1pvpstats.pvpawaysets}> - <{$p1pvpstats.pvpawaysetslose}></td>
+			<td><{$smarty.const._XD_PVPSETS}></td>
+			<td><{$p2pvpstats.pvpawaysets}> - <{$p2pvpstats.pvpawaysetslose}></td>
+		</tr>
+		<tr class="even">
+			<td><{$p1pvpstats.pvpaway180}></td>
+			<td><{$smarty.const._XD_PVP180}></td>
+			<td><{$p2pvpstats.pvpaway180}></td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1pvpstats.pvpawayhighfinish != 0}><{$p1pvpstats.pvpawayhighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_PVPHIGHFINISH}></td>
+			<td><{if $p2pvpstats.pvpawayhighfinish != 0}><{$p2pvpstats.pvpawayhighfinish}><{/if}>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<th><{$smarty.const._XD_PVPMATCHESVS}></th>
+			<td>&nbsp;</td>
+		</tr>
+		<{foreach item=pi from=$pvpmatch}>
+			<tr class="<{cycle values="odd,even"}>">
+				<td>&nbsp;</td>
+				<td><{$pi.date}>: <{$pi.homeplayer}> <{$pi.homesets}> - <{$pi.awaysets}> <{$pi.awayplayer}> (<{$pi.eventname}> / <{$pi.seasonname}>)</td>
+				<td>&nbsp;</td>
+			</tr>
+		<{/foreach}>
+	<{/if}>
+	<tr>
+		<td style="font-weight:bold;text-decoration:underline"><{$p1pvpname}></td>
+		<th><{$smarty.const._XD_PVPOVERALLSTATS}></th>
+		<td style="font-weight:bold;text-decoration:underline"><{$p2pvpname}></td>
+	</tr>
+	<tr class="even">
+		<td>&nbsp;</td>
+		<td style="font-weight:bold"><{$smarty.const._XD_PVPTOTAL}></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr class="odd">
+		<td><{$p1stats.totmatches}></td>
+		<td><{$smarty.const._XD_PVPMATCHES}></td>
+		<td><{$p2stats.totmatches}></td>
+	</tr>
+		<tr class="even">
+			<td><{$p1stats.totwins}> (<{$p1stats.avgtotwins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATTOTWINS}></td>
+			<td><{$p2stats.totwins}> (<{$p2stats.avgtotwins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.totdraws}> (<{$p1stats.avgtotdraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATTOTDRAWS}></td>
+			<td><{$p2stats.totdraws}> (<{$p2stats.avgtotdraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.totloses}> (<{$p1stats.avgtotloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATTOTLOSES}></td>
+			<td><{$p2stats.totloses}> (<{$p2stats.avgtotloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.totsets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avgtotsets}>)</td>
+			<td><{$smarty.const._XD_STATTOTSETS}></td>
+			<td><{$p2stats.totsets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avgtotsets}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.totsetswin}> (<{$p1stats.avgtotsetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATTOTSETSWIN}></td>
+			<td><{$p2stats.totsetswin}> (<{$p2stats.avgtotsetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.totsetslose}> (<{$p1stats.avgtotsetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATTOTSETSLOSE}></td>
+			<td><{$p2stats.totsetslose}> (<{$p2stats.avgtotsetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.tot180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avgtot180}>)</td>
+			<td><{$smarty.const._XD_PVP180}></td>
+			<td><{$p2stats.tot180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avgtot180}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1stats.tothighfinish != 0}><{$p1stats.tothighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_PVPHIGHFINISH}></td>
+			<td><{if $p2stats.tothighfinish != 0}><{$p2stats.tothighfinish}><{/if}>&nbsp;</td>
+		</tr>
+	<tr class="even">
+		<td>&nbsp;</td>
+		<td style="font-weight:bold"><{$smarty.const._XD_HOME}></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr class="odd">
+		<td><{$p1stats.homematches}></td>
+		<td><{$smarty.const._XD_STATHOMEMATCHES}></td>
+		<td><{$p2stats.homematches}></td>
+	</tr>
+		<tr class="even">
+			<td><{$p1stats.homewins}> (<{$p1stats.avghomewins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATHOMEWINS}></td>
+			<td><{$p2stats.homewins}> (<{$p2stats.avghomewins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.homedraws}> (<{$p1stats.avghomedraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATHOMEDRAWS}></td>
+			<td><{$p2stats.homedraws}> (<{$p2stats.avghomedraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.homeloses}> (<{$p1stats.avghomeloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATHOMELOSES}></td>
+			<td><{$p2stats.homeloses}> (<{$p2stats.avghomeloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.homesets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avghomesets}>)</td>
+			<td><{$smarty.const._XD_STATHOMESETS}></td>
+			<td><{$p2stats.homesets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avghomesets}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.homesetswin}> (<{$p1stats.avghomesetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATHOMESETSWIN}></td>
+			<td><{$p2stats.homesetswin}> (<{$p2stats.avghomesetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.homesetslose}> (<{$p1stats.avghomesetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATHOMESETSLOSE}></td>
+			<td><{$p2stats.homesetslose}> (<{$p2stats.avghomesetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.home180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avghome180}>)</td>
+			<td><{$smarty.const._XD_STATHOME180}></td>
+			<td><{$p2stats.home180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avghome180}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1stats.homehighfinish != 0}><{$p1stats.homehighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_STATHOMEHIGHFINISH}></td>
+			<td><{if $p2stats.homehighfinish != 0}><{$p2stats.homehighfinish}><{/if}>&nbsp;</td>
+		</tr>
+	<tr class="even">
+		<td>&nbsp;</td>
+		<td style="font-weight:bold"><{$smarty.const._XD_AWAY}></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr class="odd">
+		<td><{$p1stats.awaymatches}></td>
+		<td><{$smarty.const._XD_STATAWAYMATCHES}></td>
+		<td><{$p2stats.awaymatches}></td>
+	</tr>
+		<tr class="even">
+			<td><{$p1stats.awaywins}> (<{$p1stats.avgawaywins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATAWAYWINS}></td>
+			<td><{$p2stats.awaywins}> (<{$p2stats.avgawaywins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.awaydraws}> (<{$p1stats.avgawaydraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATAWAYDRAWS}></td>
+			<td><{$p2stats.awaydraws}> (<{$p2stats.avgawaydraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.awayloses}> (<{$p1stats.avgawayloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATAWAYLOSES}></td>
+			<td><{$p2stats.awayloses}> (<{$p2stats.avgawayloses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.awaysets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avgawaysets}>)</td>
+			<td><{$smarty.const._XD_STATAWAYSETS}></td>
+			<td><{$p2stats.awaysets}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avgawaysets}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.awaysetswin}> (<{$p1stats.avgawaysetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATAWAYSETSWIN}></td>
+			<td><{$p2stats.awaysetswin}> (<{$p2stats.avgawaysetswin}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{$p1stats.awaysetslose}> (<{$p1stats.avgawaysetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+			<td><{$smarty.const._XD_STATAWAYSETSLOSE}></td>
+			<td><{$p2stats.awaysetslose}> (<{$p2stats.avgawaysetslose}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</td>
+		</tr>
+		<tr class="even">
+			<td><{$p1stats.away180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p1stats.avgaway180}>)</td>
+			<td><{$smarty.const._XD_STATAWAY180}></td>
+			<td><{$p2stats.away180}> (<{$smarty.const._XD_STATAVGSHORT}> <{$p2stats.avgaway180}>)</td>
+		</tr>
+		<tr class="odd">
+			<td><{if $p1stats.awayhighfinish != 0}><{$p1stats.awayhighfinish}><{/if}>&nbsp;</td>
+			<td><{$smarty.const._XD_STATAWAYHIGHFINISH}></td>
+			<td><{if $p2stats.awayhighfinish != 0}><{$p2stats.awayhighfinish}><{/if}>&nbsp;</td>
+		</tr>
+</table>
+</div>
+<br>

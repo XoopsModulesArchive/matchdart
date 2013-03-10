@@ -1,0 +1,19 @@
+<table width='100%' cellspacing='2' cellpadding='2' border='0'>
+	<tr>
+		<td width='50%' align='left'><span style='font-size: 10px; font-weight: bold;'><u><{$smarty.const._BL_XD_PLAYER}></u></span></td>
+		<td width='15%' align='center'><span style='font-size: 10px; font-weight: bold;'><u><{$smarty.const._BL_XD_POINTS}></u></span></td>
+		<td width='35%' align='center'><span style='font-size: 10px; font-weight: bold;'><u><{$smarty.const._BL_XD_MATCHES}></u></span></td> 
+ 	</tr>
+</table>
+<marquee behavior='scroll' direction='up' width='100%' height='100' scrollamount='1' scrolldelay='60' onmouseover='this.stop()' onmouseout='this.start()'>
+	<table width='100%' cellspacing='2' cellpadding='2' border='0'>
+	<{foreach item=bi from=$block}>
+		<tr>
+			<td width='50%' align='left'><span style='font-size: 10px; font-weight: normal;'><{$bi.name}></span></td>
+			<td width='15%' align='right'><span style='font-size: 10px; font-weight: normal;'><{$bi.points}></span></td>
+			<td width='35%' align='center'><span style='font-size: 10px; font-weight: normal;'><{$bi.wins}> - <{$bi.loss}></span></td>
+       	</tr>
+	<{/foreach}>
+	</table>
+	<div align="center"style='font-size: 10px; font-weight: bold;'><a href="modules/matchdart"><{$smarty.const._BL_XD_GOTOMAIN}></a></div>
+</marquee>
