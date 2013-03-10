@@ -1,0 +1,146 @@
+<SCRIPT LANGUAGE="JavaScript">
+	
+	function fill_defaults(f,mtdefault){
+   		var variantid = f.variant.selectedIndex
+   		f.mt_initialscore.value = mtdefault[variantid].mt_initialscore
+	}
+
+</SCRIPT>
+
+<form name="xd_matches_form" method="post" action="matches.php">
+<br>
+<span>
+	<b><{$smarty.const._XD_MATCHDATE}></b>
+	<{if $action=='addnew'}>
+	<select name="in_day" tabindex="1">
+		<{section name=day start=1 loop=32 step=1}>
+			<option <{if $smarty.section.day.index == $date.day}>selected="selected"<{/if}> value="<{$smarty.section.day.index}>"><{$smarty.section.day.index}></option>
+		<{/section}>
+	</select>
+	-
+	<select name="in_month" tabindex="2">
+		<{section name=month start=1 loop=13 step=1}>
+			<option <{if $smarty.section.month.index == $date.month}>selected="selected"<{/if}> value="<{$smarty.section.month.index}>"><{$smarty.section.month.index}></option>
+		<{/section}>
+	</select>
+	-
+	<select name="in_year" tabindex="3">
+		<{foreach item=yi from=$year}>
+			<option <{if $yi == $date.year}>selected="selected"<{/if}> value="<{$yi}>"><{$yi}></option>
+		<{/foreach}>
+	</select>
+	<{/if}>
+	
+	<{if $action=='modify' or $action=='delete'}>
+	<select name="in_day" tabindex="1" <{if $action=='delete'}>disabled<{/if}>>
+		<{section name=day start=1 loop=32 step=1}>
+			<option <{if $smarty.section.day.index == $matchdata.MatchDay}>selected="selected"<{/if}> value="<{$smarty.section.day.index}>"><{$smarty.section.day.index}></option>
+		<{/section}>
+	</select>
+	-
+	<select name="in_month" tabindex="2" <{if $action=='delete'}>disabled<{/if}>>
+		<{section name=month start=1 loop=13 step=1}>
+			<option <{if $smarty.section.month.index == $matchdata.MatchMonth}>selected="selected"<{/if}> value="<{$smarty.section.month.index}>"><{$smarty.section.month.index}></option>
+		<{/section}>
+	</select>
+	-
+	<select name="in_year" tabindex="3" <{if $action=='delete'}>disabled<{/if}>>
+		<{foreach item=yi from=$year}>
+			<option <{if $yi == $matchdata.MatchYear}>selected="selected"<{/if}> value="<{$yi}>"><{$yi}></option>
+		<{/foreach}>
+	</select>
+	<{/if}>
+	<br>
+	<br>
+</span>
+<table width="100" border="0">
+    <tr>
+	  <td align="left" valign="middle"><b><{$smarty.const._XD_HOME}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_TBLSETS}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_TBLLEGS}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_MATCHBONUSPOINTS}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBL180SHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLHIGHFINISHSHORT}></b></td>
+  	  <td width="50">&nbsp;</td>
+  	  <td align="left" valign="middle"><b><{$smarty.const._XD_AWAY}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_TBLSETS}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_TBLLEGS}></b></td>
+      <td align="center" valign="middle"><b><{$smarty.const._XD_MATCHBONUSPOINTS}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBL180SHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLHIGHFINISHSHORT}></b></td>
+	  <td>&nbsp;</td>
+    </tr>
+    <tr>
+	  <td align="left">
+		<select name="in_homeid" tabindex="4" <{if $action=='delete'}>disabled<{/if}>>
+			<{foreach item=pi from=$player}>
+				<option <{if $pi.id == $matchdata.MatchHomeID}>selected="selected"<{/if}> value="<{$pi.id}>"><{$pi.name}></option>
+			<{/foreach}>
+		</select>
+      </td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homesets" tabindex="5" value="<{$matchdata.MatchHomeSets}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homelegs" tabindex="6" value="<{$matchdata.MatchHomeLegs}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homebp" tabindex="7" value="<{$matchdata.MatchHomeBpoints}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td align="center" valign="middle"><input type="text" size="2" name="in_home180" tabindex="8" value="<{$matchdata.MatchHome180}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td align="center" valign="middle"><input type="text" size="2" name="in_homehighfinish" tabindex="9" value="<{$matchdata.MatchHomeHighfinish}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td>&nbsp;</td>
+  	  <td align="left">
+  	  	<select name="in_awayid" tabindex="13" <{if $action=='delete'}>disabled<{/if}>>
+			<{foreach item=pi from=$player}>
+				<option <{if $pi.id == $matchdata.MatchAwayID}>selected="selected"<{/if}> value="<{$pi.id}>"><{$pi.name}></option>
+			<{/foreach}>
+		</select>
+	  </td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awaysets" tabindex="14" value="<{$matchdata.MatchAwaySets}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awaylegs" tabindex="15" value="<{$matchdata.MatchAwayLegs}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awaybp" tabindex="16" value="<{$matchdata.MatchAwayBpoints}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_away180" tabindex="17" value="<{$matchdata.MatchAway180}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td align="center" valign="middle"><input type="text" size="2" name="in_awayhighfinish" tabindex="18" value="<{$matchdata.MatchAwayHighfinish}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td>
+  	  	<{if $action=='addnew'}><input type="submit" name="go_addnew" value="<{$smarty.const._XD_GOADDNEW}>" tabindex="22"><{/if}>
+  	  	<{if $action=='modify'}><input type="submit" name="go_modify" value="<{$smarty.const._XD_GOMODIFY}>" tabindex="22"><{/if}>
+  	  	<{if $action=='delete'}><input type="submit" name="go_delete" value="<{$smarty.const._XD_GODELETE}>" onclick="return confirm('<{$smarty.const._XD_MATCHDELETECONFIRM}>')" tabindex="22"><{/if}>
+  	  </td>
+    </tr>
+    <{if $eventdata.playerstats == 1}>
+    <tr>
+  	  <td>&nbsp;</td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLDARTSSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLPPTSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLPPDSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLMATCHDARTSSHORT}></b></td>
+  	  <td align="center" valign="middle">&nbsp;</td>
+  	  <td width="50">&nbsp;</td>
+  	  <td>&nbsp;</td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLDARTSSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLPPTSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLPPDSHORT}></b></td>
+  	  <td align="center" valign="middle"><b><{$smarty.const._XD_TBLMATCHDARTSSHORT}></b></td>
+  	  <td align="center" valign="middle">&nbsp;</td>
+	  <td>&nbsp;</td>
+    </tr>
+    <tr>
+  	  <td>&nbsp;</td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homedarts" tabindex="10" value="<{$matchdata.MatchHomeDarts}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homeppt" tabindex="11" value="<{$matchdata.MatchHomePPT}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homeppd" tabindex="12" value="<{$matchdata.MatchHomePPD}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_homematchdarts" tabindex="12" value="<{$matchdata.MatchHomeMatchDarts}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td align="center" valign="middle">&nbsp;</td>
+  	  <td>&nbsp;</td>
+  	  <td>&nbsp;</td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awaydarts" tabindex="19" value="<{$matchdata.MatchAwayDarts}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awayppt" tabindex="20" value="<{$matchdata.MatchAwayPPT}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awayppd" tabindex="21" value="<{$matchdata.MatchAwayPPD}>" <{if $action=='delete'}>disabled<{/if}>></td>
+      <td align="center" valign="middle"><input type="text" size="2" name="in_awaymatchdarts" tabindex="21" value="<{$matchdata.MatchAwayMatchDarts}>" <{if $action=='delete'}>disabled<{/if}>></td>
+  	  <td align="center" valign="middle">&nbsp;</td>
+	  <td align="left">&nbsp;</td>
+    </tr>
+    <{/if}>
+  </table>
+  <br>
+
+<input type="hidden" name="in_season" value="<{$seasonid}>">
+<input type="hidden" name="in_event" value="<{$eventid}>">
+<input type="hidden" name="in_matchid" value="<{$actionid}>">
+
+</form>

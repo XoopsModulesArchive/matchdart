@@ -1,0 +1,139 @@
+************************************
+*    Version 1.5 | 04-MAR-2008     *
+************************************
+
+INSTALLATION 
+************************************
+1. Unzip the folder "matchdart" to yoursite/modules/  folder  on your server.
+2. Install the module as you usually do.
+3. Go to the modules admin and set the preferences from the module menu
+4. Now you are ready to go!!!
+
+UPDATE FROM PREV. VERSION 
+************************************
+1. Backup your Xoops DB 
+   (the update is no great deal and only the matchdart tables are concerned but better be save!) 
+2. Unzip the folder "matchdart" to yoursite/modules/  folder on your server, overwriting the prev. version files.
+3. Update the module in the modules administration.
+4. Set the preferences from the module menu
+5. Go to the modules admin and select Update from the module menu
+6. Update your Match Dart Tables 
+   (Adds new fields to tables matchdart_matches, matchdart_eventnames
+    Updates fied value for PlayerStats in matchdart_matches) 
+7. Now you are ready to go!!!
+
+LOGGING IN FOR THE FIRST TIME
+************************************
+- Make sure to setup at least one season and event
+- You must first add at least two players to the database to access eventmatches-page.
+
+MENU AND SEASON SELECTOR
+************************************
+With menu you can navigate through admin area and with season/event selector 
+you can change season/event you want to edit.
+
+SEASON CONTROL
+************************************
+You can add as many seasons as you like, though seasons with 
+same name can not be added. Add new season simply by giving a 
+season name and clicking 'Add season'-button. New season name should 
+now appear on the right side of the page.
+
+It is best to use years as season names ie.  2004, 2005, 2006 and so on.
+But you can enter any name you want for the season.
+
+Be sure to mark one season as default!
+
+Modify season by clicking it first from the list and then do necessary changes.
+Seasons are automatically published. If you don't want to publish specific 
+season, then uncheck the checkbox. If season is published, it is visible 
+at the actual statistics.
+
+If you want to delete a season, you must first delete all matches from it.
+
+EVENT CONTROL
+************************************
+An Event can be a league or a tournament or just a training group playing round robin etc.
+
+You can add as many events as you like, though eventss with 
+same name can not be added. Add new event simply by giving a 
+event name and clicking 'Add event'-button. New event name should 
+now appear on the right side of the page.
+
+You can enter the event specific preferences:
+Points for Win	: Number of Points scored by a Win 	
+Points for Draw : Number of Points scored by a Draw	
+Points for Loss : Number of Points scored by a Loss
+Draw line after which position : Draw a line in the table behind position
+ e.g.  1,16 will draw a line in the table after pos.1 (Champion) and pos.16 (Loser!)   
+Use Player Stats: Do you want to insert and display additional Player stats for the games of this event
+
+Be sure to mark one event as default!
+
+Modify event by clicking it first from the list and then do necessary changes.
+Events are automatically published. If you don't want to publish specific 
+event, then uncheck the checkbox. If event is published, it is visible 
+at the actual statistics.
+
+If you want to delete a event, you must first delete all matches from it.
+
+events are NOT unique to each season, so all event names can be seen in any season.
+
+PLAYER CONTROL
+*************************************
+matchdarts works for Single Players as well as for Teams. In case of teams just change the 
+Descriptrions in your language files and use the players with team names.
+
+Control players same as seasons and events. You can assign a Xoops User to each player, 
+so that the player results in the table and matches in the schedule will be highlighted if
+the corresponding Xoops User is logged in.
+
+MATCH CONTROL
+*************************************
+
+Go to Permissions and grant a Xoops Group the permission to "Add Matches".
+Users belonging to this group now see the menu item "matches" in the module menu. 
+Users in the group "Webmasters" have this permission, anyway. 
+
+Add matches:
+-choose a date
+-select players from the dropdown menus (add final scores). 
+- you can then enter the match stats (for home and away player each) 
+180*	:  Number of 180s scored by the player
+BP*		:  Bonus Points given for this match (e.g. for tournament finals)
+Sets	:  Number of Sets won by the player
+HiFi*	:  Highfinish scored by the player 
+
+**Darts : Number of Darts thrown by player
+**PPD   : Points per Dart hit by player
+**PPT   : Points per Throw (3 darts) hit by player
+**MDs	: Match Darts thrown by player
+
+Finally click 'Add'
+*optional stats
+**extended player stats (only visible if event settings are set in this way).
+
+All matches with Sets entered will be added to the database. Win/Draw/Lose calculation is done automatically.
+
+
+Modify matches:
+- select season / event
+- click on the modify match icon
+- Match Data is displayed in the form
+- Modify the data as needed
+- click on Modify Button
+
+Delete match:
+- select season / event
+- click on the delete match icon
+- Match Data is displayed in the form (Read Only)
+- click on Delete Button
+
+MINITABLE BLOCK
+**********************************
+matchdart comes with a block
+showing the default season's/events ranking + Sets for and against.
+It can be activated via blocks administration.
+If you want to display a Ranking List for All Seasons and/or All Events in the Block,
+please uncomment lines 40 and/or 41 in /blocks/minitable.php
+

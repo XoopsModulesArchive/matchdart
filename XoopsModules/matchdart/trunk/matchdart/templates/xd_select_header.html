@@ -1,0 +1,72 @@
+
+<script type="text/javascript">
+function refresh (selbox) {
+	switch (selbox) {
+  		case "in_season":
+			document.forms.xd_select_header.go_season.value = 1;
+	    	break;
+  		case "in_event":
+			document.forms.xd_select_header.go_event.value = 1;
+		    break;
+	}
+	document.forms.xd_select_header.submit();
+}
+</script> 
+ 
+<form name="xd_select_header" method="post" action="<{$script}>">
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_header_width}>">
+<{$update_msg}>
+<table>
+	<tr>
+		<td colspan="2" align="center">
+			<{$smarty.const._XD_GOTODESCR}>
+			<select name="in_moveto">
+				<option <{if $script=='pvp.php'}>selected="selected"<{/if}> value="index.php"><{$smarty.const._XD_GOTOINDEX}></option>
+				<option  <{if $script=='index.php'}>selected="selected"<{/if}> value="stats.php"><{$smarty.const._XD_GOTOSTATS}></option>
+				<option <{if $script=='stats.php'}>selected="selected"<{/if}> value="pvp.php"><{$smarty.const._XD_GOTOPVP}></option>
+			</select>
+			<input type="submit" class="button" value=">>" name="go_moveto">
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_CHANGESEASON}></td>
+					<td width="45%">
+<!--						<select name="in_season" onchange="document.forms.xd_select_header.go_season.click()">-->
+						<select name="in_season" onchange="refresh('in_season')">
+							<{if $script!='matches.php'}>
+							 <{if $xd_tballseasons==1}><option value="0"><{$smarty.const._XD_ALLSEASONS}></option><{/if}>
+							<{/if}>
+							<{foreach item=si from=$season}>
+								<option <{if $si.id==$seasonid}>selected="selected"<{/if}> value="<{$si.id}>"><{$si.name}></option>
+							<{/foreach}>
+						</select>
+					</td>
+					<td width="10%"><input type="hidden" name="go_season" value=""></td>
+				</tr>
+			</table>
+		</td>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_CHANGEEVENT}></td>
+					<td width="45%">
+						<select name="in_event" onchange="refresh('in_event')">
+							<{if $script!='matches.php'}>
+							 <{if $xd_tballevents==1}><option value="0"><{$smarty.const._XD_ALLEVENTS}></option><{/if}>
+							<{/if}>
+							<{foreach item=ei from=$event}>
+								<option <{if $ei.id==$eventid}>selected="selected"<{/if}> value="<{$ei.id}>"><{$ei.name}></option>
+							<{/foreach}>
+						</select>
+					</td>
+					<td width="10%"><input type="hidden" name="go_event" value=""></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</div>
+</form>

@@ -1,0 +1,457 @@
+<{include file="db:xd_select_header.html"}>
+
+<script type="text/javascript">
+function refreshindex (selbox) {
+	switch (selbox) {
+  		case "in_display":
+			document.forms.xd_index_form.go_display.value = 1;
+	    	break;
+  		case "in_table":
+			document.forms.xd_index_form.go_table.value = 1;
+		    break;
+	}
+	document.forms.xd_index_form.submit();
+}
+</script> 
+
+
+<form name="xd_index_form" method="post" action="index.php">
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_header_width}>">
+<table>
+	<tr>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_DISPLAYSCHEDULE}></td>
+					<td width="45%">
+						<select name="in_display" onchange="refreshindex('in_display')">
+							<option <{if $display=='1'}>selected="selected"<{/if}> value="1"><{$smarty.const._XD_SCHEDULEALL}></option>
+							<{if myplayeruid != -1}><option <{if $display=='2'}>selected="selected"<{/if}> value="2"><{$smarty.const._XD_SCHEDULEOWN}></option><{/if}>
+							<option <{if $display=='3'}>selected="selected"<{/if}> value="3"><{$smarty.const._XD_SCHEDULENONE}></option>
+						</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_display"></td>
+				</tr>
+			</table>
+		</td>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_TABLEMODE}></td>
+					<td width="45%">
+						<select name="in_table" onchange="refreshindex('in_table')">
+							<option <{if $table=='1'}>selected="selected"<{/if}> value="1"><{$smarty.const._XD_TABLEMODESIMP}></option>
+							<option <{if $table=='2'}>selected="selected"<{/if}> value="2"><{$smarty.const._XD_TABLEMODETRA}></option>
+						</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_table"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</div>
+</form>
+<br>
+
+<{if $table=='2'}>
+ <div style="margin-left:auto;margin-right:auto;width:<{$xd_tb_trawidth}>">
+<{else}>
+ <div style="margin-left:auto;margin-right:auto;width:<{$xd_tb_simwidth}>">
+<{/if}>
+<{if $seasonid==0 and $xd_degradefactor!=0}>
+	
+	<p><b><{$smarty.const._XD_DEGRADEFACTOR}></b> <{$xd_degradefactor}> <{$smarty.const._XD_DEGRADETIME}><br></p>
+
+<{/if}>
+<table class="outer" cellspacing="1" align="center"<{if $table=='2'}> style="font-size:<{$xd_tb_tratext}>"<{/if}>>
+	<tr>
+		<td colspan="3">
+		</td>
+		<th <{if $xd_displayplayerstats == 0}>colspan="7"<{else}>colspan="9"<{/if}> class="head">
+			<{$smarty.const._XD_OVERALL}>
+		</th>
+		<{if $table=='2'}>
+		<th <{if $xd_displayplayerstats == 0}>colspan="7"<{else}>colspan="9"<{/if}> class="head">
+			<{$smarty.const._XD_HOME}>
+		</th>
+		<th <{if $xd_displayplayerstats == 0}>colspan="7"<{else}>colspan="9"<{/if}> class="head">
+			<{$smarty.const._XD_AWAY}>
+		</th>
+		<{/if}>
+		<td colspan="2">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+		<th colspan="3" class="head">
+			<{$smarty.const._XD_MATCHES}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_SETS}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_LEGS}>
+		</th>
+		<{if $xd_displayplayerstats == 1}><th colspan="2" class="head">&nbsp;</th><{/if}>
+		<{if $table=='2'}>
+		<th colspan="3" class="head">
+			<{$smarty.const._XD_MATCHES}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_SETS}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_LEGS}>
+		</th>
+		<{if $xd_displayplayerstats == 1}><th colspan="2" class="head">&nbsp;</th><{/if}>
+		<th colspan="3" class="head">
+			<{$smarty.const._XD_MATCHES}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_SETS}>
+		</th>
+		<th colspan="2" class="head">
+			<{$smarty.const._XD_LEGS}>
+		</th>
+		<{if $xd_displayplayerstats == 1}><th colspan="2" class="head">&nbsp;</th><{/if}>
+		<{/if}>
+		<td colspan="2">
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<{$smarty.const._XD_TBLPOSSHORT}>
+		</th>
+		<th>
+			<{$smarty.const._XD_TBLPLAYER}>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLPTS}>"><{$smarty.const._XD_TBLPTSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLWINS}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLDRAWS}>"><{$smarty.const._XD_TBLDRAWSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLOSES}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<{if $xd_displayplayerstats == 1}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLHIGHFINISH}>"><{$smarty.const._XD_TBLHIGHFINISHSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBL180}>"><{$smarty.const._XD_TBL180SHORT}></span>
+		</th>
+		<{/if}>
+		<{if $table=='2'}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLWINS}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLDRAWS}>"><{$smarty.const._XD_TBLDRAWSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLOSES}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<{if $xd_displayplayerstats == 1}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLHIGHFINISH}>"><{$smarty.const._XD_TBLHIGHFINISHSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBL180}>"><{$smarty.const._XD_TBL180SHORT}></span>
+		</th>
+		<{/if}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLWINS}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLDRAWS}>"><{$smarty.const._XD_TBLDRAWSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLOSES}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLSETSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSWIN}>"><{$smarty.const._XD_TBLWINSSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLLEGSLOST}>"><{$smarty.const._XD_TBLLOSESSHORT}></span>
+		</th>
+		<{if $xd_displayplayerstats == 1}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLHIGHFINISH}>"><{$smarty.const._XD_TBLHIGHFINISHSHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBL180}>"><{$smarty.const._XD_TBL180SHORT}></span>
+		</th>
+		<{/if}>
+		<{/if}>
+		<th>
+			<span title="<{$smarty.const._XD_TBLDELTA}>"><{$smarty.const._XD_TBLDELTASHORT}></span>
+		</th>
+		<th>
+			<span title="<{$smarty.const._XD_TBLPLAYED}>"><{$smarty.const._XD_TBLPLAYEDSHORT}></span>
+		</th>
+	</tr>
+	<{foreach item=pi from=$players}>
+		<tr class="<{cycle values="odd,even"}>" style="valign:middle<{if $pi.uid == $myplayeruid}>;color:<{$xd_highlightplayer}><{/if}>">
+			<td align="right">
+				<b><{$pi.pos}></b>
+			</td>
+			<td align="left">
+				<b><{$pi.name}></b>
+			</td>
+			<td  align="right" style = "align:right;background-color:<{$xd_highlightpts}>;">
+				<b><{$pi.points}></b>
+			</td>
+			<td align="right">
+				<{$pi.wins}>
+			</td>
+			<td align="right">
+				<{$pi.draw}>
+			</td>
+			<td align="right">
+				<{$pi.loss}>
+			</td>
+			<td align="right">
+				<{$pi.sets}>
+			</td>
+			<td align="right">
+				<{$pi.setslost}>
+			</td>
+			<td align="right">
+				<{$pi.legs}>
+			</td>
+			<td align="right">
+				<{$pi.legslost}>
+			</td>
+		<{if $xd_displayplayerstats == 1}>
+			
+			<td align="right">
+				<{$pi.highfinish}>
+			</td>
+			<td align="right">
+				<{$pi.180}>
+			</td>
+		<{/if}>
+			<{if $table=='2'}>
+			<td align="right">
+				<{$pi.homewins}>
+			</td>
+			<td align="right">
+				<{$pi.homedraw}>
+			</td>
+			<td align="right">
+				<{$pi.homeloss}>
+			</td>
+			<td align="right">
+				<{$pi.homesets}>
+			</td>
+			<td align="right">
+				<{$pi.homesetslost}>
+			</td>
+			<td align="right">
+				<{$pi.homelegs}>
+			</td>
+			<td align="right">
+				<{$pi.homelegslost}>
+			</td>
+		<{if $xd_displayplayerstats == 1}>
+			<td align="right">
+				<{$pi.homehighfinish}>
+			</td>
+			<td align="right">
+				<{$pi.home180}>
+			</td>
+		<{/if}>
+			<td align="right">
+				<{$pi.awaywins}>
+			</td>
+			<td align="right">
+				<{$pi.awaydraw}>
+			</td>
+			<td align="right">
+				<{$pi.awayloss}>
+			</td>
+			<td align="right">
+				<{$pi.awaysets}>
+			</td>
+			<td align="right">
+				<{$pi.awaysetslost}>
+			</td>
+			<td align="right">
+				<{$pi.awaylegs}>
+			</td>
+			<td align="right">
+				<{$pi.awaylegslost}>
+			</td>
+		<{if $xd_displayplayerstats == 1}>
+			<td align="right">
+				<{$pi.awayhighfinish}>
+			</td>
+			<td align="right">
+				<{$pi.away180}>
+			</td>
+		<{/if}>
+			<{/if}>
+			<td align="right">
+				<{$pi.matchdelta}>
+			</td>
+			<td style = "text-align:right;background-color:<{$xd_highlightpts}>;">
+				<{$pi.matches}>
+			</td>
+		</tr>
+		
+		<{foreach item=li from=$draw_line}>
+			<{if $li == $pi.pos}>
+				<tr>
+					<td height="5" colspan="32" align="center" valign="middle">
+						<img src="images/line.gif" width="95%" height="5" alt="">
+					</td>
+				</tr>
+			<{/if}>
+		<{/foreach}>
+			
+	<{/foreach}>
+</table>
+<h5  style="font-size:10px"><{$smarty.const._XD_LASTUPDT}>&nbsp;<{$lastupdate}></h5>
+</div>
+
+
+<{if $display != 3}>
+<{if $table=='2'}><div style="margin-left:auto;margin-right:auto;width:<{$xd_tb_trawidth}>"><{else}><div style="margin-left:auto;margin-right:auto;width:<{$xd_tb_simwidth}>"><{/if}>
+<table>
+	<tr>
+		<th align="center" colspan="2"><{$smarty.const._XD_SCHEDULE}></th>
+	</tr>
+	<tr>
+		<td width="50%">
+<table>
+	<tr>
+		<th align="center" colspan="2">
+			<{$smarty.const._XD_SCHEDULEMATCHPLAYED}>
+		</th>
+	</tr>
+	<{if $playednomatches == 1}>
+		<tr>
+		<td colspan="2" align="left">
+		<b><{$smarty.const._XD_SCHEDULENOMATCHES}></b>
+		</td>
+		</tr>
+	<{/if}>
+	<{foreach item=cpi from=$calendarplayed}>
+	<{if $cpi.datedisplay != -1}>
+	<tr>
+		<td width="10%">
+			<b><{$cpi.datedisplay}></b>
+		</td>
+		<td></td>
+	</tr>
+	<{/if}>
+	<tr>
+		<td></td>
+		<td align="center">
+			<{if $cpi.datedisplay != -1}><br><{/if}>
+			<{if $cpi.homeuid == $myplayeruid}>
+				<span style="color:<{$xd_highlightplayer}>"><b><{$cpi.homeplayer}></b></span>
+			<{/if}>
+			<{if $cpi.homeuid != $myplayeruid}>
+				<b><{$cpi.homeplayer}></b>
+			<{/if}>
+			<b> - </b> 
+			<{if $cpi.awayuid == $myplayeruid}>
+				<span style="color:<{$xd_highlightplayer}>"><b><{$cpi.awayplayer}></b></span>
+			<{/if}>
+			<{if $cpi.awayuid != $myplayeruid}>
+				<b><{$cpi.awayplayer}></b>
+			<{/if}>
+			<br><{$cpi.homesets}> - <{$cpi.awaysets}>
+		</td>
+	</tr>
+	<{/foreach}>
+</table>
+
+		</td>
+		<td width="50%">
+<table>
+	<tr>
+		<th align="center" colspan="2">
+			<{$smarty.const._XD_SCHEDULEMATCHUPCOMING}>
+		</th>
+	</tr>
+	<{if $upcomingnomatches == 1}>
+		<tr>
+		<td colspan="2" align="left">
+		<b><{$smarty.const._XD_SCHEDULENOMATCHES}></b>
+		</td>
+		</tr>
+	<{/if}>
+	<{foreach item=cui from=$calendarupcoming}>
+	<{if $cui.datedisplay != -1}>
+	<tr>
+		<td width="10%">
+			<b><{$cui.datedisplay}></b>
+		</td>
+		<td></td>
+	</tr>
+	<{/if}>
+	<tr>
+		<td></td>
+		<td align="center">
+			<{if $cui.datedisplay != -1}><br><{/if}> 
+			<{if $cui.homeuid == $myplayeruid}>
+				<span style="color:<{$xd_highlightplayer}>"><b><{$cui.homeplayer}></b></span>
+			<{/if}>
+			<{if $cui.homeuid != $myplayeruid}>
+				<b><{$cui.homeplayer}></b>
+			<{/if}>
+			<b> - </b> 
+			<{if $cui.awayuid == $myplayeruid}>
+				<span style="color:<{$xd_highlightplayer}>"><b><{$cui.awayplayer}></b></span>
+			<{/if}>
+			<{if $cui.awayuid != $myplayeruid}>
+				<b><{$cui.awayplayer}></b>
+			<{/if}>
+			<br>
+		</td>
+	</tr>
+	<{/foreach}>
+	
+</table>
+		</td>
+	</tr>
+</table>
+</div>
+<{/if}>

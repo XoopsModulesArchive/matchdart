@@ -1,0 +1,258 @@
+<{include file="db:xd_select_header.html"}>
+
+<script type="text/javascript">
+function refreshstats (selbox) {
+	switch (selbox) {
+  		case "in_displaystats":
+			document.forms.xd_stats_form.go_displaystats.value = 1;
+	    	break;
+  		case "in_statsplayer":
+			document.forms.xd_stats_form.go_statsplayer.value = 1;
+		    break;
+	}
+	document.forms.xd_stats_form.submit();
+}
+</script> 
+
+
+<form name="xd_stats_form" method="post" action="<{$script}>">
+
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_header_width}>">
+<table>
+	<tr>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<td align="right" width="45%"><{$smarty.const._XD_DISPLAYSTATS}></td>
+					<td width="45%">
+						<select name="in_displaystats" onchange="refreshstats('in_displaystats')">
+							<option <{if $displaystats == '1'}>selected="selected"<{/if}> value="1"><{$smarty.const._XD_SEASONEVENTSTATS}></option>
+							<option <{if $displaystats == '2'}>selected="selected"<{/if}> value="2"><{$smarty.const._XD_PLAYERSTATS}></option>
+						</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_displaystats"></td>
+				</tr>
+			</table>
+		</td>
+		<td width="50%" align="center">
+			<table>
+				<tr>
+					<{if $displaystats == '2'}>
+					<td align="right" width="45%"><{$smarty.const._XD_STATSPLAYER}></td>
+					<td width="45%">
+						<select name="in_statsplayer" onchange="refreshstats('in_statsplayer')">
+		      				<{foreach item=pi from=$player}>
+      							<option <{if $pi.id==$playerid}>selected="selected"<{/if}> value="<{$pi.id}>"><{$pi.name}></option>
+      						<{/foreach}>
+      					</select>
+					</td>
+					<td width="10%"><input type="hidden" value="" name="go_statsplayer"></td>
+					<{else}>
+					<td>&nbsp;</td>
+					<{/if}>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+<br>
+</div>
+
+<div style="margin-left:auto;margin-right:auto;width:<{$xd_stats_width}>">
+<table class="outer" cellspacing="1" align="left">
+	<tr>
+		<td align="center">&nbsp;</td>
+		<th align="center"><{$smarty.const._XD_OVERALL}></th>
+		<th align="center"><{$smarty.const._XD_HOME}></th>
+		<th align="center"><{$smarty.const._XD_AWAY}></th>
+	</tr>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_MATCHES}></th>
+		<td align="center"><{$stats.totMatches}></td>
+		<td align="center"><{$stats.homeMatches}></td>
+		<td align="center"><{$stats.awayMatches}></td>
+	</tr>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATWDL}></th>
+		<td align="center">
+		<table><tr>
+		<td align="center"><{$stats.totMatchWins}><br /><{if $stats.totMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.totAvgMatchWins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		<td align="center"><{$stats.totMatchDraws}><br /><{if $stats.totMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.totAvgMatchDraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td> 
+		<td align="center"><{$stats.totMatchLoses}><br /><{if $stats.totMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.totAvgMatchLoses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		</tr></table>
+		</td>
+		<td align="center">
+		<table><tr>
+		<td align="center"><{$stats.homeMatchWins}><br /><{if $stats.homeMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.homeAvgMatchWins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		<td align="center"><{$stats.homeMatchDraws}><br /><{if $stats.homeMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.homeAvgMatchDraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td> 
+		<td align="center"><{$stats.homeMatchLoses}><br /><{if $stats.homeMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.homeAvgMatchLoses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		</tr></table>
+		</td>
+		<td align="center">
+		<table><tr>
+		<td align="center"><{$stats.awayMatchWins}><br /><{if $stats.awayMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.awayAvgMatchWins}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		<td align="center"><{$stats.awayMatchDraws}><br /><{if $stats.awayMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.awayAvgMatchDraws}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td> 
+		<td align="center"><{$stats.awayMatchLoses}><br /><{if $stats.awayMatches != 0}><span title="<{$smarty.const._XD_OFFPLAYED}>">(<{$stats.awayAvgMatchLoses}> <{$smarty.const._XD_STATPERCENTSYMBOL}>)</span><{/if}></td>
+		</tr></table>
+		</td>
+	</tr>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_SETS}></th>
+		<td align="center"><{$stats.totSets}> <{if $stats.totMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.totAvgSets}>)</span><{/if}></td>
+		<td align="center"><{$stats.homeSets}> <{if $stats.homeMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.homeAvgSets}>)</span><{/if}></td>
+		<td align="center"><{$stats.awaySets}> <{if $stats.awayMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.awayAvgSets}>)</span><{/if}></td>
+	</tr>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATWL}></th>
+		<td align="center">
+		<{$stats.totSetWins}> <{if $stats.totMatches != 0}>(<{$stats.totAvgSetWins}>)<{/if}> / 
+		<{$stats.totSetLoses}> <{if $stats.totMatches != 0}>(<{$stats.totAvgSetLoses}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.homeSetWins}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgSetWins}>)<{/if}> / 
+		<{$stats.homeSetLoses}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgSetLoses}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.awaySetWins}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgSetWins}>)<{/if}> / 
+		<{$stats.awaySetLoses}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgSetLoses}>)<{/if}>
+		</td>
+	</tr>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_LEGS}></th>
+		<td align="center"><{$stats.totLegs}> <{if $stats.totMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.totAvgLegs}>)</span><{/if}></td>
+		<td align="center"><{$stats.homeLegs}> <{if $stats.homeMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.homeAvgLegs}>)</span><{/if}></td>
+		<td align="center"><{$stats.awayLegs}> <{if $stats.awayMatches != 0}><span title="<{$smarty.const._XD_PERMATCH}>">(<{$stats.awayAvgLegs}>)</span><{/if}></td>
+	</tr>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATWL}></th>
+		<td align="center">
+		<{$stats.totLegWins}> <{if $stats.totMatches != 0}>(<{$stats.totAvgLegWins}>)<{/if}> / 
+		<{$stats.totLegLoses}> <{if $stats.totMatches != 0}>(<{$stats.totAvgLegLoses}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.homeLegWins}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgLegWins}>)<{/if}> / 
+		<{$stats.homeLegLoses}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgLegLoses}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.awayLegWins}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgLegWins}>)<{/if}> / 
+		<{$stats.awayLegLoses}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgLegLoses}>)<{/if}>
+		</td>
+	</tr>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_STAT180}></th>
+		<td align="center">
+		<{$stats.tot180}> <{if $stats.totMatches != 0}>(<{$stats.totAvg180}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.home180}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvg180}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.away180}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvg180}>)<{/if}>
+		</td>
+	</tr>
+	<{if $displaystats == 1}>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATHIGHFINISH}></th>
+		<td align="center">
+			<{if $stats.totHighfinish != 0}>
+				<{$stats.totHighfinish}> (<{$stats.totHighfinishDate}> <{$smarty.const._XD_HIGHFINISHBY}> <{$stats.totHighfinishPlayer}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+		<td align="center">
+			<{if $stats.homeHighfinish != 0}>
+				<{$stats.homeHighfinish}> (<{$stats.homeHighfinishDate}> <{$smarty.const._XD_HIGHFINISHBY}> <{$stats.homeHighfinishPlayer}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+		<td align="center">
+			<{if $stats.awayHighfinish != 0}>
+				<{$stats.awayHighfinish}> (<{$stats.awayHighfinishDate}> <{$smarty.const._XD_HIGHFINISHBY}> <{$stats.awayHighfinishPlayer}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+	</tr>
+	<{/if}>
+	<{if $displaystats == 2}>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATHIGHFINISH}></th>
+		<td align="center">
+			<{if $stats.totHighfinish != 0}>
+				<{$stats.totHighfinish}> (<{$stats.totHighfinishDate}> <{$smarty.const._XD_HIGHFINISHAGAINST}> <{$stats.totHighfinishOpponent}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+		<td align="center">
+			<{if $stats.homeHighfinish != 0}>
+				<{$stats.homeHighfinish}> (<{$stats.homeHighfinishDate}> <{$smarty.const._XD_HIGHFINISHAGAINST}> <{$stats.homeHighfinishOpponent}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+		<td align="center">
+			<{if $stats.awayHighfinish != 0}>
+				<{$stats.awayHighfinish}> (<{$stats.awayHighfinishDate}> <{$smarty.const._XD_HIGHFINISHAGAINST}> <{$stats.awayHighfinishOpponent}>) 
+			<{else}>
+				&nbsp;
+			<{/if}>
+		</td>
+	</tr>
+	<{/if}>
+	<{if $stats.PlayerStats != 0}>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_STATMATCHDARTS}></th>
+		<td align="center">
+		<{$stats.totMatchDarts}> <{if $stats.totMatches != 0}>(<{$stats.totAvgMatchDarts}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.homeMatchDarts}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgMatchDarts}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.awayMatchDarts}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgMatchDarts}>)<{/if}>
+		</td>
+	</tr>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATDARTS}></th>
+		<td align="center">
+		<{$stats.totDarts}> <{if $stats.totMatches != 0}>(<{$stats.totAvgDarts}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.homeDarts}> <{if $stats.homeMatches != 0}>(<{$stats.homeAvgDarts}>)<{/if}>
+		</td>
+		<td align="center">
+		<{$stats.awayDarts}> <{if $stats.awayMatches != 0}>(<{$stats.awayAvgDarts}>)<{/if}>
+		</td>
+	</tr>
+	<tr class="odd">
+		<th align="center"><{$smarty.const._XD_STATPPT}></th>
+		<td align="center">
+		<{$stats.totAvgPpt}>
+		</td>
+		<td align="center">
+		<{$stats.homeAvgPpt}>
+		</td>
+		<td align="center">
+		<{$stats.awayAvgPpt}>
+		</td>
+	</tr>
+	<tr class="even">
+		<th align="center"><{$smarty.const._XD_STATPPD}></th>
+		<td align="center">
+		<{$stats.totAvgPpd}>
+		</td>
+		<td align="center">
+		<{$stats.homeAvgPpd}>
+		</td>
+		<td align="center">
+		<{$stats.awayAvgPpd}>
+		</td>
+	</tr>
+	<{/if}>
+</table>
+</div>
+<br>
