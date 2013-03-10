@@ -164,8 +164,6 @@ define("_XD_MATCHNOAWAYSET","Away Sets must not be empty");
 define("_XD_MATCHDELETECONFIRM","Really delete Match? No restore possible!");
 define("_XD_MATCHDELETE","Delete Match");
 define("_XD_MATCHDELETED","Match successfully deleted!");
-define("_XD_MATCHDMODIFY","Modify Match");
+define("_XD_MATCHMODIFY","Modify Match");
 define("_XD_GOMODIFY","Modify");
 define("_XD_GODELETE","Delete");
-
-?>

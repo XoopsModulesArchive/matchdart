@@ -27,13 +27,15 @@
  */
 
 $modversion['name'] = "MatchDart";
-$modversion['version'] = "1.5.0";
+$modversion['version'] = "1.6.0";
 $modversion['description'] = 'Dart Ranking for Xoops';
 $modversion['author'] = 'mawi27';
 $modversion['author_website_url'] = "http://www.matchdart.de";
 $modversion['author_website_name'] = "Match Dart";
 $modversion['credits'] = "Based on TPLLeagueStats Xoops Port by Mithrandir,ralf57,M0nty";
-$modversion['license'] = "GPL see LICENSE";
+$modversion['help']        = 'page=help';
+$modversion['license']     = 'GNU GPL 2.0 or later';
+$modversion['license_url'] = "www.gnu.org/licenses/gpl-2.0.html";
 $modversion["license_file"] = XOOPS_URL."/modules/matchdart/gpl.txt";
 $modversion["release_info"] = "README";
 $modversion["release_file"] = XOOPS_URL."/modules/matchdart/readme.txt";
@@ -43,13 +45,26 @@ $modversion['official'] = 0;
 $modversion['image'] = "images/matchdart_slogo.png";
 $modversion['dirname'] = "matchdart";
 
-$modversion['demo_site_url'] = "http://www.matchdart.de/modules/matchdart";
-$modversion['demo_site_name'] = "Match Dart";
-$modversion["module_website_url"] = "http://www.matchdart.de/modules/matchdart";
-$modversion["module_website_name"] = "Match Dart";
+$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
+$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
+$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
+//about
+$modversion['release_date']        = '2013/03/10';
+$modversion["module_website_url"]  = "www.xoops.org";
+$modversion["module_website_name"] = "XOOPS";
+$modversion["module_status"]       = "Beta 1";
+$modversion['min_php']             = '5.2';
+$modversion['min_xoops']           = "2.5.5";
+$modversion['min_admin']           = '1.1';
+$modversion['min_db']              = array(
+    'mysql'  => '5.0.7',
+    'mysqli' => '5.0.7'
+);
 
-$modversion["release"] = "2008-03-04";
-$modversion["module_status"] = "Release";
+$modversion['demo_site_url'] = "";
+$modversion['demo_site_name'] = "Match Dart";
+$modversion["module_website_url"] = "";
+$modversion["module_website_name"] = "Match Dart";
 
 // Sql file
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
@@ -64,6 +79,7 @@ $modversion['tables'][3] = "matchdart_eventnames";
 
 // Admin things
 $modversion['hasAdmin'] = 1;
+$modversion['system_menu'] = 1;
 $modversion['adminindex'] = "admin/index.php";
 $modversion['adminmenu'] = "admin/menu.php";
 

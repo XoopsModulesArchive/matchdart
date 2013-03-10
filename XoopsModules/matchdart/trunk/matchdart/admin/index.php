@@ -1,36 +1,32 @@
 <?php
-
 /*
- *************************************************************
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
- *************************************************************
- * MatchDart by wild0ne <info@matchdart.de>
- * developed & tested with XOOPS 2.0.18
- *************************************************************
- * Version 1.5 | 04-MAR-2008
- *************************************************************
- * READ manual.txt for installing & other help!!!
- * ************************************************************
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-include '../../../include/cp_header.php'; //Include file, which checks for permissions and sets navigation
+/**
+ * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author     XOOPS Development Team
+ * @version    $Id $
+ */
+
+
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
+include_once dirname(__FILE__) . '/admin_header.php';
 
 xoops_cp_header();
 
-header("Location:seasons.php");
+	$indexAdmin = new ModuleAdmin();
 
-xoops_cp_footer();
-?>
+    echo $indexAdmin->addNavigation('index.php');
+    echo $indexAdmin->renderIndex();
+
+include "admin_footer.php";

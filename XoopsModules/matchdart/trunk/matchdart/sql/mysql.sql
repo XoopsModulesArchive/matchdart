@@ -51,7 +51,7 @@ CREATE TABLE matchdart_matches (
 	  KEY MatchAwayLoserID (MatchAwayLoserID),
 	  KEY MatchHomeTieID (MatchHomeTieID),
 	  KEY MatchAwayTieID (MatchAwayTieID)
-	) TYPE=MyISAM;
+	) ENGINE=MyISAM;
 
 CREATE TABLE matchdart_players (
 	  PlayerID smallint(4) unsigned NOT NULL auto_increment,
@@ -60,7 +60,7 @@ CREATE TABLE matchdart_players (
 	  PlayerEventID int(10) default NULL,
 	  PlayerName varchar(128) default NULL,
 	  PRIMARY KEY  (PlayerID)
-	) TYPE=MyISAM;
+	) ENGINE=MyISAM;
 	
 CREATE TABLE matchdart_seasonnames (
 	  SeasonID int(10) unsigned NOT NULL auto_increment,
@@ -69,10 +69,10 @@ CREATE TABLE matchdart_seasonnames (
 	  SeasonLine varchar(32) default NULL,
 	  SeasonDefault tinyint(1) default NULL,
 	  PRIMARY KEY  (SeasonID)
-	) TYPE=MyISAM;
+	) ENGINE=MyISAM;
 	
 INSERT INTO matchdart_seasonnames (SeasonID, SeasonName, SeasonPublish, SeasonLine, SeasonDefault)
-	VALUES ('1', '2005', '1', '1', '1');
+	VALUES ('1', '2013', '1', '1', '1');
 
 CREATE TABLE matchdart_eventnames (
 	  EventID int(10) unsigned NOT NULL auto_increment,
@@ -87,7 +87,7 @@ CREATE TABLE matchdart_eventnames (
   	  EventInitialScore int(5) default NULL,
 	  EventPlayerStats tinyint(1) default NULL,
 	  PRIMARY KEY  (EventID)
-	) TYPE=MyISAM;
+	) ENGINE=MyISAM;
 	
 INSERT INTO matchdart_eventnames (EventID, EventName, EventPublish, EventPointsWin, EventPointsDraw, EventPointsLoss, EventLine, EventDefault, EventMatchVariant, EventInitialScore, EventPlayerStats)
 	VALUES ('1', 'Premier', '1', '3', '1', '0', '1,2', '1', 'x01', 301, 1);

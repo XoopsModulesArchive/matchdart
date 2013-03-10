@@ -26,7 +26,8 @@
  * ************************************************************
  */
 
-if(!session_is_registered('event_name') || !session_is_registered('event_id'))
+//if(!session_is_registered('event_name') || !session_is_registered('event_id'))
+if ( !isset( $_SESSION['event_name'] ) || !isset( $_SESSION['event_id'] ))
 {
 	echo "<form method=\"post\" action=\"eventmatches.php\">";
 	echo '<b><?php echo _AM_XD_CHOEVENT;?></b>';

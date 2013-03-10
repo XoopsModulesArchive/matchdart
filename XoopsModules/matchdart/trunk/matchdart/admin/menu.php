@@ -26,17 +26,60 @@
  * ************************************************************
  */
 
-$adminmenu[1]['title'] = _MI_XD_ADMENUSEASONS;
-$adminmenu[1]['link'] = "admin/seasons.php";
-$adminmenu[2]['title'] = _MI_XD_ADMENUEVENTS;
-$adminmenu[2]['link'] = "admin/events.php";
-$adminmenu[3]['title'] = _MI_XD_ADMENUPLAYERS;
-$adminmenu[3]['link'] = "admin/players.php";
-$adminmenu[4]['title'] = _MI_XD_ADMENUPERMISSIONS;
-$adminmenu[4]['link'] = "admin/permissions.php";
-$adminmenu[5]['title'] = _MI_XD_ADMENUUPDATE;
-$adminmenu[5]['link'] = "admin/update.php";
-$adminmenu[6]['title'] = _MI_XD_ADMENUABOUT;
-$adminmenu[6]['link'] = "admin/about.php";
+defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
-?>
+$path = dirname(dirname(dirname(dirname(__FILE__))));
+include_once $path . '/mainfile.php';
+
+$dirname         = basename(dirname(dirname(__FILE__)));
+$module_handler  = xoops_gethandler('module');
+$module          = $module_handler->getByDirname($dirname);
+$pathIcon32      = $module->getInfo('icons32');
+$pathModuleAdmin = $module->getInfo('dirmoduleadmin');
+$pathLanguage    = $path . $pathModuleAdmin;
+
+
+if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
+    $fileinc = $pathLanguage . '/language/english/main.php';
+}
+
+include_once $fileinc;
+
+$adminmenu = array();
+$i=0;
+$adminmenu[$i]["title"] = _AM_MODULEADMIN_HOME;
+$adminmenu[$i]['link'] = "admin/index.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/home.png';
+//$i++;
+//$adminmenu[$i]['title'] = _AM_MODULEADMIN_HOME;
+//$adminmenu[$i]['link'] = "admin/main.php";
+//$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUSEASONS;
+$adminmenu[$i]['link'] = "admin/seasons.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/category.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUEVENTS;
+$adminmenu[$i]['link'] = "admin/events.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/event.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUPLAYERS;
+$adminmenu[$i]['link'] = "admin/players.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/users.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUPERMISSIONS;
+$adminmenu[$i]['link'] = "admin/permissions.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/permissions.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUUPDATE;
+$adminmenu[$i]['link'] = "admin/update.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/update.png';
+$i++;
+$adminmenu[$i]['title'] = _MI_XD_ADMENUABOUT;
+$adminmenu[$i]['link'] = "admin/about.php";
+$adminmenu[$i]["icon"]  = $pathIcon32 . '/about.png';
+
+//$i++;
+//$adminmenu[$i]['title'] = _AM_MODULEADMIN_ABOUT;
+//$adminmenu[$i]["link"]  = "admin/about0.php";
+//$adminmenu[$i]["icon"]  = $pathIcon32 . '/about.png';

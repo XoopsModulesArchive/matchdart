@@ -25,7 +25,7 @@
  * READ manual.txt for installing & other help!!!
  * ************************************************************
  */
-
+include_once 'admin_header.php';
 include '../../../include/cp_header.php'; //Include file, which checks for permissions and sets navigation
 if (@include_once XOOPS_ROOT_PATH."/Frameworks/art/functions.php")
 {
@@ -49,8 +49,10 @@ $matchdart_modify_submit = isset($_POST['modify_submit']) ? $_POST['modify_submi
 $matchdart_delete_submit = isset($_POST['delete_submit']) ? $_POST['delete_submit'] : false;
 
 xoops_cp_header();
-if ($noframework == 0){loadModuleAdminMenu(1);}
-if ($noframework == 1){include 'navbar.php';}
+//if ($noframework == 0){loadModuleAdminMenu(1);}
+//if ($noframework == 1){include 'navbar.php';}
+$indexAdmin = new ModuleAdmin();
+echo $indexAdmin->addNavigation('seasons.php');
 
 if($matchdart_add_submit)
 {
